@@ -178,6 +178,7 @@ class AbstractCalculation:
             'subtraction': Subtraction,
             'multiplication': Multiplication,
             'division': Division,
+            'exponentiation': Exponentiation
         }
         calculation_class = calculation_classes.get(calculation_type.lower())
         if not calculation_class:
@@ -354,3 +355,33 @@ class Division(Calculation):
                 raise ValueError("Cannot divide by zero.")
             result /= value
         return result
+    
+class Exponentiation(Calculation):
+    """
+    Exponentiation calculation subclass.
+    
+    Implements exponentiation of a base raised to an exponent.
+    Examples:
+        [2, 3] -> 2 ** 3 = 8
+        [5, 0] -> 5 ** 0 = 1
+    """
+    __mapper_args__ = {"polymorphic_identity": "exponentiation"}
+
+    def get_result(self) -> float:
+        """
+        Calculate the result of raising the base to the exponent.
+        
+        Expects exactly two inputs: base and exponent.
+        
+        Returns:
+            float: The result of the exponentiation
+            
+        Raises:
+            ValueError: If inputs are not a list or if there are not exactly two numbers
+        """
+        if not isinstance(self.inputs, list):
+            raise ValueError("Inputs must be a list of numbers.")
+        if len(self.inputs) != 2:
+            raise ValueError("Inputs must be a list with exactly two numbers: [base, exponent].")
+        base, exponent = self.inputs
+        return base ** exponent

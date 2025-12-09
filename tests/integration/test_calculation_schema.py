@@ -97,3 +97,33 @@ def test_calculation_response_valid():
     assert calc_response.type == "subtraction"
     assert calc_response.inputs == [20, 5]
     assert calc_response.result == 15.5
+
+def test_calculation_create_valid_exponentiation():
+    """Test creating a valid CalculationCreate schema for exponentiation."""
+    data = {
+        "type": "exponentiation",
+        "inputs": [2, 3],
+        "user_id": uuid4()
+    }
+    calc = CalculationCreate(**data)
+    assert calc.type == "exponentiation"
+    assert calc.inputs == [2, 3]
+    assert calc.user_id is not None
+
+def test_calculation_response_valid_exponentiation():
+    """Test creating a valid CalculationResponse schema for exponentiation."""
+    data = {
+        "id": uuid4(),
+        "user_id": uuid4(),
+        "type": "exponentiation",
+        "inputs": [2, 3],
+        "result": 8.0,
+        "created_at": datetime.utcnow(),
+        "updated_at": datetime.utcnow(),
+    }
+    calc_response = CalculationResponse(**data)
+    assert calc_response.id is not None
+    assert calc_response.user_id is not None
+    assert calc_response.type == "exponentiation"
+    assert calc_response.inputs == [2, 3]
+    assert calc_response.result == 8.0

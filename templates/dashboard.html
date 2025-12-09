@@ -54,6 +54,7 @@
           <option value="subtraction">Subtraction</option>
           <option value="multiplication">Multiplication</option>
           <option value="division">Division</option>
+          <option value="exponentiation">Exponentiation</option>
         </select>
       </div>
       <!-- Inputs -->
@@ -244,7 +245,8 @@ document.addEventListener('DOMContentLoaded', function() {
         throw new Error('Failed to load calculations');
       }
 
-      const calculations = await response.json();
+      const calculations = (await response.json()).reverse(); // Show latest first
+
       tableBody.innerHTML = '';
 
       if (calculations.length === 0) {
