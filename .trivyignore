@@ -1,8 +1,7 @@
 # 忽略 h11 漏洞: h11 accepts some malformed Chunked-Encoding bodies
 CVE-2025-43859
 
-# 忽略 python-jose 漏洞: algorithm confusion
-CVE-2024-33663
+CVE-2024-33663 # 忽略 python-jose 漏洞: algorithm confusion
 
 # 忽略 starlette 漏洞: Starlette DoS via Range header merging
 CVE-2025-62727
